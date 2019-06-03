@@ -55,16 +55,60 @@
       <span class="pl">{{ hito.hitokoto }}</span>
       <span class="pll">来源：{{ hito.from }}</span>
     </section>
-    <section class="hito bbl">
+    <section class="date bbl fix">
       <h2 class="titlebl">
-        <sy-icon style="height: 18px; width:18px;" name="#iconclock"></sy-icon>
+        <sy-icon
+          style="height: 18px; width:18px;"
+          name="#iconvalentines-day"
+        ></sy-icon>
         纪念日
       </h2>
       <ul class="date-card-list">
-        <li></li>
+        <li class="days-card">
+          <ul class="date-wrapper">
+            <li>
+              <p class="date">八月初十</p>
+              <p class="title">我颖生日</p>
+            </li>
+            <li>
+              <p class="date">冬月初三</p>
+              <p class="title">本人生日</p>
+            </li>
+            <li>
+              <p class="date">7月11日</p>
+              <p class="title">周年纪念</p>
+            </li>
+          </ul>
+        </li>
+        <li class="days-card" v-for="(item, index) in markList" :key="index">
+          <div class="date-wrapper">
+            <div class="date-top">
+              <img :src="require('@/assets/images/ICON9.png')" alt="" />
+            </div>
+            <div class="date-content">
+              还剩<span style="font-size: 14px;color:#000">{{
+                item.date.days
+              }}</span
+              >天<span style="font-size: 14px;color:#000">{{
+                item.date.hours
+              }}</span
+              >小时<span style="font-size: 14px;color:#000">{{
+                item.date.minutes
+              }}</span
+              >分<span style="font-size: 14px;color:#000">{{
+                item.date.seconds
+              }}</span
+              >秒
+            </div>
+          </div>
+        </li>
       </ul>
     </section>
-    <section v-for="(item, index) in cardList" class="nav-card" :key="index">
+    <section
+      v-for="(item, index) in cardList"
+      class="nav-card fix"
+      :key="index"
+    >
       <div class="card-header">
         <div class="card-title">
           <h2 class="titlebl">
@@ -79,13 +123,8 @@
       <body class="card-body">
         <wait
           :name="index === 0 ? 'd9.jpg' : 'd8.jpg'"
-          :tip="index === 0 ? '你老公在码代码中...' : '好困哟...'"
+          :tip="index === 0 ? '码代码中...' : '好困哟...'"
         ></wait>
-        <!-- <ul class="box-wrapper">
-          <li v-for="(card, index) in item.cardNavList" :key="index">
-            {{ card.label || '测试' }}
-          </li>
-        </ul> -->
       </body>
     </section>
   </div>
@@ -98,12 +137,12 @@ export default {
   data() {
     return {
       hito: {},
-      loveTime: {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0
-      },
+      loveTime: {},
+      markList: [
+        { title: '周年纪念日', id: 'anniversary', date: {} },
+        { title: '颖的生日', id: 'yingbirth', date: {} },
+        { title: '锁的生日', id: 'suobirth', date: {} }
+      ],
       navList1: [
         {
           imgUrl: '@/assets/images/ICON9.png',
@@ -160,33 +199,49 @@ export default {
   methods: {
     getMood() {
       getMood().then(res => {
-        // console.log(res)
         this.hito = res.data
       })
     },
     calcLoveDays(distance) {
       const days = Math.floor(distance / (24 * 3600 * 1000))
-      const leave1 = distance % (24 * 3600 * 1000) //计算天数后剩余的毫秒数
+      const leave1 = distance % (24 * 3600 * 1000)
       const hours = Math.floor(leave1 / (3600 * 1000))
-      //计算相差分钟数
-      const leave2 = leave1 % (3600 * 1000) //计算小时数后剩余的毫秒数
+      const leave2 = leave1 % (3600 * 1000)
       const minutes = Math.floor(leave2 / (60 * 1000))
-      //计算相差秒数
-      const leave3 = leave2 % (60 * 1000) //计算分钟数后剩余的毫秒数
+      const leave3 = leave2 % (60 * 1000)
       const seconds = Math.round(leave3 / 1000)
-      this.loveTime = {
+      console.log(distance)
+      return {
         days: days,
         hours: hours,
         minutes: minutes,
         seconds: seconds
       }
     },
+    setMarkDate(end, type) {
+      const now = new Date().getTime()
+      const distance = end - now - 1000
+      this.markList.forEach((item, index) => {
+        if (item.id === type) {
+          this.markList[index].date = this.calcLoveDays(distance)
+        }
+      })
+    },
+    setLoveDate(start) {
+      const now = new Date().getTime()
+      const distance = now - start + 1000
+      this.loveTime = this.calcLoveDays(distance)
+    },
     setClock() {
       setInterval(() => {
-        const now = new Date().getTime()
+        const a_end = new Date('2019-07-12 00:00:00').getTime()
+        const s_end = new Date('2019-11-28 00:00:00').getTime()
+        const y_end = new Date('2019-09-08 00:00:00').getTime()
         const start = new Date('2014-07-12 00:00:00').getTime()
-        const distance = now - start + 1000
-        this.calcLoveDays(distance)
+        this.setMarkDate(a_end, 'anniversary')
+        this.setMarkDate(s_end, 'suobirth')
+        this.setMarkDate(y_end, 'yingbirth')
+        this.setLoveDate(start)
       }, 1000)
     }
   },
@@ -263,7 +318,7 @@ section.nav-wrapper {
       width: 24%;
       height: 0;
       padding-bottom: 20%;
-      box-shadow: 1px 4px 4px 2px #ccc;
+      box-shadow: 1px 4px 4px 2px #cdd;
       float: left;
       background: 100% 100% url('../../assets/images/b1.jpeg') no-repeat;
       background-size: $bg-size;
@@ -295,7 +350,7 @@ section.nav-wrapper {
       &:hover {
         transition: all 0.1s;
         transform: translateY(-2%);
-        box-shadow: 1px 4px 4px 2px #666;
+        box-shadow: 1px 4px 4px 2px #bbb;
       }
     }
     &.nav2 {
@@ -332,10 +387,11 @@ section.nav-wrapper {
 section.hito {
   margin-top: 8px;
   margin-left: 0.8%;
+  box-shadow: 1px 1px 4px 1px #cdd;
 }
 section.nav-card {
   margin: 8px 0;
-  box-shadow: 1px 4px 4px 2px #ccc;
+  box-shadow: 1px 4px 4px 2px #cdd;
   .card-header {
     margin-bottom: 8px;
     padding-left: 0.8%;
@@ -366,6 +422,49 @@ section.nav-card {
         }
         // opacity: 0.8;
         // filter: alpha(opacity=80);
+      }
+    }
+  }
+}
+section.date {
+  margin: 8px 0;
+  .date-card-list {
+    width: 100%;
+    // padding-bottom: 40%;
+    // border: #666 1px solid;
+    .days-card {
+      float: left;
+      position: relative;
+      margin-left: 0.8%;
+      height: 0;
+      width: 24%;
+      padding-bottom: 34%;
+      box-shadow: 1px 2px 4px 2px #ccc;
+      .date-wrapper {
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        color: #f00;
+        li {
+          margin-top: 12px;
+          line-height: 1.4;
+          .date {
+            font-size: 16px;
+          }
+          .title {
+            font-size: 12px;
+          }
+        }
+        .date-top {
+          height: 40%;
+          img {
+            height: 40%;
+          }
+        }
+        .date-content {
+          font-size: 12px;
+        }
+        // .date
       }
     }
   }

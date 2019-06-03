@@ -115,7 +115,7 @@ $nav-header: 50px;
   margin: 0 auto;
   width: 100%;
   background: #ddd;
-  box-shadow: 1px 4px 4px 2px #ccc;
+  box-shadow: 1px 1px 2px 3px #cdd;
   .logo {
     position: absolute;
     left: 10px;
@@ -133,7 +133,7 @@ $nav-header: 50px;
     background-position: center;
     background-size: cover;
     height: 0;
-    box-shadow: 1px 4px 4px 2px #ccc;
+    box-shadow: 1px 4px 4px 2px #cdd;
     padding-bottom: 30%;
     &.slide-1 {
       background-image: url('../../assets/images/l1.jpg');
