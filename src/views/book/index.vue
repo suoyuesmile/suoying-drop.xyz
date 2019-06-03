@@ -1,6 +1,6 @@
 <template>
   <div>
-    234
+    <wait name="d3.jpg" tip="捏捏..."></wait>
   </div>
 </template>
 

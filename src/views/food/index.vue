@@ -1,7 +1,5 @@
 <template>
-  <div>
-    123
-  </div>
+  <wait name="d11.jpeg" tip="咦..."></wait>
 </template>
 
 <script>

@@ -1,438 +1,374 @@
 <template>
-  <div class="main">
-    <div class="firstfloor">
-      <div id="lunbo">
-        <div id="list" style="left:-920px;">
-          <img :src="require('@/assets/images/5.jpg')" alt="1" />
-          <img :src="require('@/assets/images/1.jpg')" alt="1" />
-          <img :src="require('@/assets/images/2.jpg')" alt="2" />
-          <img :src="require('@/assets/images/3.jpeg')" alt="3" />
-          <img :src="require('@/assets/images/4.png')" alt="4" />
-          <img :src="require('@/assets/images/5.jpg')" alt="5" />
-          <img :src="require('@/assets/images/1.jpg')" alt="5" />
+  <div class="main fix">
+    <section class="nav-wrapper">
+      <ul class="nav nav1 fix">
+        <li
+          v-for="(item, index) in navList1"
+          :key="index"
+          @click="$router.push(item.path)"
+        ></li>
+      </ul>
+      <ul class="nav nav2 fix">
+        <li></li>
+        <div class="l love-wrapper fix">
+          <div class="talk">
+            <div class="i dib">
+              <sy-icon name="#iconman"></sy-icon>
+              <div>锁</div>
+            </div>
+            <div class="love dib">
+              <sy-icon name="#iconlove-"></sy-icon>
+              <div>爱</div>
+            </div>
+            <div class="u dib">
+              <sy-icon class="u" name="#iconwoman"></sy-icon>
+              <div>颖</div>
+            </div>
+          </div>
+          <div class="days" style="color: #666;">
+            相爱<span style="font-size: 14px;color:#000">{{
+              loveTime.days
+            }}</span
+            >天<span style="font-size: 14px;color:#000">{{
+              loveTime.hours
+            }}</span
+            >小时<span style="font-size: 14px;color:#000">{{
+              loveTime.minutes
+            }}</span
+            >分<span style="font-size: 14px;color:#000">{{
+              loveTime.seconds
+            }}</span
+            >秒
+          </div>
         </div>
-        <div id="buttons">
-          <span index="1" class="on"></span>
-          <span index="2"></span>
-          <span index="3"></span>
-          <span index="4"></span>
-          <span index="5"></span>
+        <li></li>
+      </ul>
+      <ul class="nav nav3 fix">
+        <li v-for="(item, index) in navList3" :key="index"></li>
+      </ul>
+    </section>
+    <section class="hito bbl">
+      <h2 class="titlebl">
+        <sy-icon style="height: 18px; width:18px;" name="#iconchat-"></sy-icon>
+        中二病：
+      </h2>
+      <span class="pl">{{ hito.hitokoto }}</span>
+      <span class="pll">来源：{{ hito.from }}</span>
+    </section>
+    <section class="hito bbl">
+      <h2 class="titlebl">
+        <sy-icon style="height: 18px; width:18px;" name="#iconclock"></sy-icon>
+        纪念日
+      </h2>
+      <ul class="date-card-list">
+        <li></li>
+      </ul>
+    </section>
+    <section v-for="(item, index) in cardList" class="nav-card" :key="index">
+      <div class="card-header">
+        <div class="card-title">
+          <h2 class="titlebl">
+            <sy-icon
+              style="height: 18px; width:18px;"
+              name="#iconsmartphone"
+            ></sy-icon>
+            {{ item.title }}
+          </h2>
         </div>
-        <div id="prev" class="arrow"><div class="over1"></div></div>
-        <div id="next" class="arrow"><div class="over2"></div></div>
       </div>
-
-      <div class="guide">
-        <ul>
-          <li>
-            <a href="technology.html"
-              ><img
-                :src="require('@/assets/images/study.png')"
-                alt="技术博客"
-                title="技术博客"
-              />
-              <div class="img_w">学习一下</div></a
-            >
+      <body class="card-body">
+        <wait
+          :name="index === 0 ? 'd9.jpg' : 'd8.jpg'"
+          :tip="index === 0 ? '你老公在码代码中...' : '好困哟...'"
+        ></wait>
+        <!-- <ul class="box-wrapper">
+          <li v-for="(card, index) in item.cardNavList" :key="index">
+            {{ card.label || '测试' }}
           </li>
-          <li>
-            <a href="article.html"
-              ><img
-                :src="require('@/assets/images/project.png')"
-                alt="走心随笔"
-                title="走心随笔"
-              />
-              <div class="img_w">看看文章</div></a
-            >
-          </li>
-          <li>
-            <a href="academy.html"
-              ><img
-                :src="require('@/assets/images/academy.png')"
-                alt="校园生活"
-                title="校园生活"
-              />
-              <div class="img_w" target="_blank">逛逛校园</div></a
-            >
-          </li>
-          <li>
-            <a href="music.html"
-              ><img
-                :src="require('@/assets/images/music.png')"
-                alt="品味音乐"
-                title="品味音乐"
-              />
-              <div class="img_w">听听音乐</div></a
-            >
-          </li>
-          <li>
-            <a href="movie.html"
-              ><img
-                :src="require('@/assets/images/movie.png')"
-                alt="时尚观影"
-                title="时尚观影"
-              />
-              <div class="img_w">看看电影</div></a
-            >
-          </li>
-          <li>
-            <a href="cartoon.html"
-              ><img
-                :src="require('@/assets/images/cartoon.png')"
-                alt="二次元系"
-                title="二次元系"
-              />
-              <div class="img_w">追追动漫</div></a
-            >
-          </li>
-          <li>
-            <a href="https://lvyou.baidu.com/" target="_blank"
-              ><img
-                :src="require('@/assets/images/traver.png')"
-                alt="旅游攻略"
-                title="旅游攻略"
-              />
-              <div class="img_w">观观河山</div></a
-            >
-          </li>
-          <li>
-            <a
-              href="http://weibo.com/u/1033563127?refer_flag=1001030102_&is_hot=1"
-              ><img :src="require('@/assets/images/dai.png')" alt="还有啥的" />
-              <div class="img_w">逛逛知乎</div></a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="secondfloor">
-      <a href="bg.html"
-        ><img :src="require('@/assets/images/topic2.jpg')" alt="话题背景"
-      /></a>
-    </div>
-    <div class="thirdfloor">
-      <a href="bg.html"><img :src="require('@/assets/images/dt_bg.jpg')"/></a>
-    </div>
-    <div class="forthfloor">
-      <div class="message_copy">
-        <div class="top_blank"></div>
-        <form action="message.html" method="post" class="massage_content">
-          <h1>
-            站长留言薄
-            <span>请填写留言内容(留言后即可看到全部留言)</span>
-          </h1>
-          <label>
-            <span>你的名字 :</span>
-            <input id="name" type="text" name="name" placeholder="你的名字" />
-          </label>
-          <label>
-            <span>你的邮箱 :</span>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="填写邮箱"
-            />
-          </label>
-          <label>
-            <span>填写留言 :</span>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="发送信息内容"
-            ></textarea>
-          </label>
-          <label>
-            <span>留言类型 :</span>
-            <select name="selection">
-              <option value="Job Inquiry">关于站长</option>
-              <option value="General Question">关于博客</option>
-              <option value="General Question">关于随笔</option>
-              <option value="General Question">关于学校</option>
-              <option value="General Question">关于音乐</option>
-              <option value="General Question">关于电影</option>
-              <option value="General Question">关于动漫</option>
-              <option value="General Question">关于其他</option>
-            </select>
-          </label>
-          <label>
-            <span>&nbsp;</span>
-            <input type="submit" class="button" value="发送" />
-          </label>
-        </form>
-      </div>
-    </div>
+        </ul> -->
+      </body>
+    </section>
   </div>
 </template>
 
 <script>
-export default {}
+import { cardList } from '@/constant/index.js'
+import { getMood } from '@/api/index'
+export default {
+  data() {
+    return {
+      hito: {},
+      loveTime: {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+      },
+      navList1: [
+        {
+          imgUrl: '@/assets/images/ICON9.png',
+          label: '我们的照片墙',
+          path: '/photo/index'
+        },
+        {
+          imgUrl: '@/assets/images/academy.png',
+          label: '我们的校园'
+        },
+        {
+          imgUrl: '@/assets/images/music.png',
+          label: '爱看的书与电影'
+        },
+        {
+          imgUrl: '@/assets/images/movie.png',
+          label: '柴儿子与喵喵'
+        }
+      ],
+
+      navList2: [
+        {
+          imgUrl: '@/assets/images/cartoon.png',
+          label: '听听音乐'
+        },
+        {
+          imgUrl: '@/assets/images/traver.png',
+          label: '走过的河山'
+        }
+      ],
+
+      navList3: [
+        {
+          imgUrl: '@/assets/images/dai.png',
+          label: '100个爱情挑战目标'
+        },
+        {
+          imgUrl: '@/assets/images/dai.png',
+          label: '100个爱情挑战目标'
+        },
+        {
+          imgUrl: '@/assets/images/dai.png',
+          label: '100个爱情挑战目标'
+        },
+        {
+          imgUrl: '@/assets/images/dai.png',
+          label: '100个爱情挑战目标'
+        }
+      ],
+      cardList: cardList
+    }
+  },
+
+  methods: {
+    getMood() {
+      getMood().then(res => {
+        // console.log(res)
+        this.hito = res.data
+      })
+    },
+    calcLoveDays(distance) {
+      const days = Math.floor(distance / (24 * 3600 * 1000))
+      const leave1 = distance % (24 * 3600 * 1000) //计算天数后剩余的毫秒数
+      const hours = Math.floor(leave1 / (3600 * 1000))
+      //计算相差分钟数
+      const leave2 = leave1 % (3600 * 1000) //计算小时数后剩余的毫秒数
+      const minutes = Math.floor(leave2 / (60 * 1000))
+      //计算相差秒数
+      const leave3 = leave2 % (60 * 1000) //计算分钟数后剩余的毫秒数
+      const seconds = Math.round(leave3 / 1000)
+      this.loveTime = {
+        days: days,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+      }
+    },
+    setClock() {
+      setInterval(() => {
+        const now = new Date().getTime()
+        const start = new Date('2014-07-12 00:00:00').getTime()
+        const distance = now - start + 1000
+        this.calcLoveDays(distance)
+      }, 1000)
+    }
+  },
+  created() {
+    this.getMood()
+    this.setClock()
+  }
+}
 </script>
 
-<style scoped>
-.firstfloor {
-  width: 100%;
-  overflow: hidden;
-  background: #f5f5f5;
-  height: 550px;
-  border-bottom: 1px solid #fff;
+<style lang="scss" scoped>
+// 主题主色调
+$color-bg: #ddd;
+$color-primary: #00cc99;
+// 图表用色
+$color-warning: #ffbb00;
+$color-content: #27acff;
+$color-error: #ff5959;
+$color-danger: #fa5089;
+$color-ancient: #9f75ff;
+$color-success: #79cc3d;
+$bg-size: cover;
+.main {
+  background: $color-bg;
 }
-
-.firstfloor #lunbo {
-  margin: 0 auto;
-  position: relative;
-  width: 920px;
-  height: 400px;
-  background: #f5f5f5;
+section.nav-wrapper {
+  ul.nav {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    background: $color-bg;
+    .love-wrapper {
+      padding-top: 0px;
+      width: 48.8%;
+      margin-left: 0.8%;
+      margin-top: 0.8%;
+      font-size: 14px;
+      background-size: 50% 100%;
+      text-align: center;
+      .talk {
+        .i {
+          width: 40px;
+          div {
+            font-family: 'tahoma,"microsoft yahei","\5FAE\8F6F\96C5\9ED1"!important';
+            padding-right: 10px;
+            color: #fa5089;
+          }
+        }
+        .love {
+          width: 40px;
+          div {
+            font-family: 'tahoma,"microsoft yahei","\5FAE\8F6F\96C5\9ED1"!important';
+            color: #fa5089;
+          }
+        }
+        .u {
+          width: 55px;
+          div {
+            padding-right: 10px;
+            font-family: 'tahoma,"microsoft yahei","\5FAE\8F6F\96C5\9ED1"!important';
+            color: #fa5089;
+          }
+        }
+      }
+      .days {
+        font-size: 12px;
+      }
+    }
+    li {
+      cursor: pointer;
+      border-radius: 1%;
+      margin-left: 0.8%;
+      margin-top: 0.8%;
+      width: 24%;
+      height: 0;
+      padding-bottom: 20%;
+      box-shadow: 1px 4px 4px 2px #ccc;
+      float: left;
+      background: 100% 100% url('../../assets/images/b1.jpeg') no-repeat;
+      background-size: $bg-size;
+      &:nth-child(2) {
+        background: 100% 100% url('../../assets/images/b2.jpeg') no-repeat;
+        background-size: $bg-size;
+      }
+      &:nth-child(3) {
+        background: 100% 100% url('../../assets/images/b3.jpeg') no-repeat;
+        background-size: $bg-size;
+      }
+      &:nth-child(4) {
+        background: 100% 100% url('../../assets/images/b4.jpeg') no-repeat;
+        background-size: $bg-size;
+        margin-right: 0.8%;
+      }
+      img {
+        margin-top: 36px;
+        margin-left: calc(50% - 24px);
+        width: 100px;
+        height: 100px;
+      }
+      span {
+        display: block;
+        font-size: 14px;
+        font-family: '华文细黑';
+        text-align: center;
+      }
+      &:hover {
+        transition: all 0.1s;
+        transform: translateY(-2%);
+        box-shadow: 1px 4px 4px 2px #666;
+      }
+    }
+    &.nav2 {
+      li {
+        background: 100% 100% url('../../assets/images/b5.jpeg') no-repeat;
+        background-size: $bg-size;
+        &:nth-child(3) {
+          background: 100% 100% url('../../assets/images/b6.jpeg') no-repeat;
+          background-size: $bg-size;
+        }
+      }
+    }
+    &.nav3 {
+      li {
+        background: 100% 100% url('../../assets/images/b7.jpeg') no-repeat;
+        background-size: $bg-size;
+        &:nth-child(2) {
+          background: 100% 100% url('../../assets/images/b8.jpeg') no-repeat;
+          background-size: $bg-size;
+        }
+        &:nth-child(3) {
+          background: 100% 100% url('../../assets/images/b9.jpeg') no-repeat;
+          background-size: $bg-size;
+        }
+        &:nth-child(4) {
+          background: 100% 100% url('../../assets/images/b10.jpeg') no-repeat;
+          background-size: $bg-size;
+          margin-right: 0.8%;
+        }
+      }
+    }
+  }
 }
-
-#list {
-  position: absolute;
-  width: 9200px;
-  height: 400px;
-  z-index: 1;
+section.hito {
+  margin-top: 8px;
+  margin-left: 0.8%;
 }
-
-#list img {
-  margin-left: 10px;
-  margin-right: 10px;
-  float: left;
-  width: 900px;
-  height: 400px;
-}
-
-#buttons {
-  position: absolute;
-  height: 10px;
-  width: 100px;
-  z-index: 2;
-  bottom: 20px;
-  left: 410px;
-}
-
-#buttons span {
-  cursor: pointer;
-  float: left;
-  border: 1px solid #fff;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #333;
-  margin-right: 5px;
-}
-
-#buttons .on {
-  background: orangered;
-}
-
-.arrow {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  z-index: 2;
-  top: 185px;
-  cursor: pointer;
-}
-
-#prev {
-  left: 30px;
-  /* background: url('../require('@/assets/images/arrow2.png')'); */
-  background-size: 30px 30px;
-}
-
-#next {
-  right: 30px;
-  /* background: url('require('@/assets/images/arrow1.png')'); */
-  background-size: 30px 30px;
-}
-
-.over1,
-.over2 {
-  width: 20px;
-  height: 30px;
-  background: #000;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-}
-
-.over2 {
-  margin-left: 10px;
-}
-
-.over1 {
-  margin-right: 10px;
-}
-
-.firstfloor .guide {
-  margin: 0 auto;
-  width: 1120px;
-  height: 150px;
-}
-
-.guide ul {
-}
-
-.guide ul li {
-  line-height: 130px;
-  margin-left: 0px;
-  list-style: none;
-  width: 140px;
-  float: left;
-  opacity: 0.6;
-  filter: alpha(opacity=60);
-}
-
-.guide ul li:hover {
-  opacity: 1;
-  filter: alpha(opacity=100);
-}
-
-a {
-  position: relative;
-}
-
-.guide ul li a img {
-  margin-left: 55px;
-  width: 30px;
-  height: 30px;
-}
-
-a .img_w {
-  font-size: 14px;
-  font-family: '华文细黑';
-  margin-left: 40px;
-  position: absolute;
-  bottom: 20px;
-  width: 60px;
-  height: 20px;
-  text-align: center;
-}
-
-.secondfloor {
-  position: relative;
-  width: 100%;
-  height: 800px;
-  background: #aeaeae;
-}
-.secondfloor a {
-  line-height: 0px;
-}
-.secondfloor a img {
-  width: 100%;
-  height: 800px;
-}
-.thirdfloor {
-  width: 100%;
-  height: 700px;
-  background: #f5f5f5;
-}
-.thirdfloor a img {
-  width: 100%;
-  height: 700px;
-}
-.forthfloor {
-  width: 100%;
-  height: 800px;
-  /* background: url('../images/mess_bg.jpg'); */
-}
-.forthfloor .message_copy {
-  width: 900px;
-  height: 800px;
-  margin: 0 auto;
-}
-.top_blank {
-  width: 900px;
-  height: 50px;
-}
-.massage_content {
-  height: 550px;
-  width: 900px;
-  margin-top: 20px;
-  padding: 20px 30px 20px 30px;
-  font: 12px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #d3d3d3;
-  text-shadow: 1px 1px 1px #444;
-  border: none;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-}
-.massage_content h1 {
-  padding: 0px 0px 10px 40px;
-  display: block;
-  border-bottom: 1px solid #444;
-  margin: -10px -30px 30px -30px;
-}
-.massage_content h1 > span {
-  display: block;
-  font-size: 11px;
-}
-.massage_content label {
-  display: block;
-  margin: 0px 0px 5px;
-}
-.massage_content label > span {
-  float: left;
-  width: 20%;
-  text-align: right;
-  padding-right: 10px;
-  margin-top: 10px;
-  font-weight: bold;
-}
-.massage_content input[type='text'],
-.massage_content input[type='email'],
-.massage_content textarea,
-.massage_content select {
-  border: none;
-  color: #525252;
-  height: 25px;
-  line-height: 15px;
-  margin-bottom: 16px;
-  margin-right: 6px;
-  margin-top: 2px;
-  outline: 0 none;
-  padding: 5px 0px 5px 5px;
-  width: 30%;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  background: #dfdfdf;
-}
-.massage_content select {
-  /* background: #dfdfdf url('down-arrow.png') no-repeat right; */
-  /* background: #dfdfdf url('down-arrow.png') no-repeat right; */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-indent: 0.01px;
-  text-overflow: '';
-  width: 30%;
-  height: 35px;
-  color: #525252;
-  line-height: 25px;
-}
-.massage_content textarea {
-  height: 200px;
-  padding: 5px 0px 0px 5px;
-  width: 60%;
-}
-.massage_content .button {
-  background: #fff;
-  border: none;
-  padding: 10px 25px 10px 25px;
-  color: #585858;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  text-shadow: 1px 1px 1px #ffe477;
-  font-weight: bold;
-  box-shadow: 1px 1px 1px #3d3d3d;
-  -webkit-box-shadow: 1px 1px 1px #3d3d3d;
-  -moz-box-shadow: 1px 1px 1px #3d3d3d;
-}
-.massage_content .button:hover {
-  color: #333;
-  background-color: #ebebeb;
+section.nav-card {
+  margin: 8px 0;
+  box-shadow: 1px 4px 4px 2px #ccc;
+  .card-header {
+    margin-bottom: 8px;
+    padding-left: 0.8%;
+    height: 20px;
+    line-height: 20px;
+  }
+  .card-body {
+    background-color: $color-bg;
+    ul {
+      width: 98.4%;
+      margin-left: 0.8%;
+      li {
+        display: inline-block;
+        width: 10%;
+        height: 0;
+        padding-bottom: 10.8%;
+        margin-top: 16px;
+        margin-bottom: 24px;
+        margin-right: 5%;
+        border-radius: 5%;
+        height: 64px;
+        background: #27acff;
+        text-align: center;
+        line-height: 48px;
+        color: #fff;
+        &:last-child {
+          margin-right: 0px;
+        }
+        // opacity: 0.8;
+        // filter: alpha(opacity=80);
+      }
+    }
+  }
 }
 </style>
 

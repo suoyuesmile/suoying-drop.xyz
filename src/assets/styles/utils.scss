@@ -1,0 +1,62 @@
+// 主题主色调
+$color-bg: #ddd;
+$color-primary: #00cc99;
+// 图表用色
+$color-warning: #ffbb00;
+$color-content: #27acff;
+$color-error: #ff5959;
+$color-danger: #fa5089;
+$color-ancient: #9f75ff;
+$color-success: #79cc3d;
+/* 块状元素水平居中 */
+.auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* 清除浮动*/
+.fix {
+  *zoom: 1;
+}
+/* float */
+.l {
+  float: left;
+}
+.r {
+  float: right;
+}
+.dib {
+  display: inline-block;
+}
+.fix:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+.dib_vm {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+.titlebl {
+  display: inline-block;
+  font-size: 14px;
+  padding-bottom: 4px;
+  color: #666;
+  // border-left: 4px solid $color-ancient;
+  // font-weight: 500;
+}
+.color-pl {
+  color: #666;
+}
+.pl {
+  color: #666;
+  font-size: 14px;
+}
+.pll {
+  color: #666;
+  font-size: 12px;
+}
+.bbl {
+  border-bottom: 1px #ccc solid;
+}

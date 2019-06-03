@@ -1,84 +1,185 @@
 <template>
   <div class="header">
-    <div class="logo">
-      <a href="index.html"><img :src="logo"/></a>
-    </div>
+    <swiper :options="swiperOption">
+      <swiper-slide class="slide-1"></swiper-slide>
+      <swiper-slide class="slide-2"></swiper-slide>
+      <swiper-slide class="slide-3"></swiper-slide>
+      <swiper-slide class="slide-4"></swiper-slide>
+      <swiper-slide class="slide-5"></swiper-slide>
+      <swiper-slide class="slide-6"></swiper-slide>
+      <swiper-slide class="slide-7"></swiper-slide>
+      <div
+        class="swiper-pagination swiper-pagination-white"
+        slot="pagination"
+      ></div>
+    </swiper>
     <div class="nav">
       <ul>
-        <li></li>
-        <li><a href="/#/photo">照片墙</a></li>
-        <li><a href="/#/book">书影</a></li>
-        <li><a href="/#/food">美食</a></li>
-        <li><a href="/#/clothes">服装</a></li>
-        <li><a href="/#/cat">喵喵与柴柴</a></li>
-        <li><a href="/#/challage">爱的挑战</a></li>
-        <li>
-          <a class="care" target="_blank" href="privary.html">二人世界</a>
+        <li
+          v-for="(item, index) in navList"
+          :key="index"
+          @click="$router.push(item.path)"
+        >
+          <sy-icon class="db" :name="item.icon"></sy-icon>
+          <div :class="{ active: item.path === $route.path }">
+            {{ item.label }}
+          </div>
         </li>
-        <!-- <li><a class="care" target="_blank" href="bg.html">注册</a></li> -->
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import logo from '@/assets/images/icons.png'
+import 'swiper/dist/css/swiper.css'
+import syIcon from '@/components/sy-icon/index.vue'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   data() {
     return {
-      logo: logo
+      swiperOption: {
+        spaceBetween: 30,
+        effect: 'fade',
+        loop: true,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      },
+      navList: [
+        {
+          label: '家',
+          path: '/index',
+          icon: '#iconhome'
+        },
+        {
+          label: '挑战',
+          path: '/challage/index',
+          icon: '#iconhot-air-balloon'
+        },
+        {
+          label: '照片',
+          path: '/photo/index',
+          icon: '#iconpictures'
+        },
+        {
+          label: '喵柴',
+          path: '/cat/index',
+          icon: '#iconcat'
+        },
+        {
+          label: '美食',
+          path: '/food/index',
+          icon: '#icondinner'
+        },
+        {
+          label: '书影',
+          path: '/book/index',
+          icon: '#iconfilm-strip'
+        },
+        {
+          label: '服装',
+          path: '/clothes/index',
+          icon: '#icondress'
+        },
+        {
+          label: '关于',
+          path: '/about/index',
+          icon: '#iconpadlock'
+        }
+      ]
     }
+  },
+  components: {
+    swiper,
+    swiperSlide,
+    syIcon
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$header-height: 200px;
+$nav-header: 50px;
+
 .header {
+  position: relative;
   margin: 0 auto;
-  width: 1180px;
-  height: 130px;
-  line-height: 130px;
-}
-
-.header .logo {
-  margin-left: 80px;
-  width: 200px;
-  height: 130px;
-  float: left;
-}
-
-.header .logo a img {
-  margin-top: 35px;
-  width: 90px;
-  height: 60px;
-}
-
-.header .nav {
-  font-family: '华文细黑';
-  margin-left: 250px;
-  height: 130px;
-  width: 650px;
-  float: left;
-}
-
-.nav ul {
-  font-size: 14px;
-  list-style: none;
-}
-
-.nav ul li {
-  margin-left: 30px;
-  line-height: 130px;
-  /*padding: 20px;*/
-  float: left;
-}
-
-#active {
-  display: block;
-  height: 80px;
-  border-bottom: 2px solid #aeaeae;
-}
-.care {
-  color: #f00;
+  width: 100%;
+  background: #ddd;
+  box-shadow: 1px 4px 4px 2px #ccc;
+  .logo {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    width: 200px;
+    float: left;
+    a img {
+      margin-top: 35px;
+      width: 90px;
+      height: 60px;
+    }
+    z-index: 10001;
+  }
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    height: 0;
+    box-shadow: 1px 4px 4px 2px #ccc;
+    padding-bottom: 30%;
+    &.slide-1 {
+      background-image: url('../../assets/images/l1.jpg');
+    }
+    &.slide-2 {
+      background-image: url('../../assets/images/l2.jpg');
+    }
+    &.slide-3 {
+      background-image: url('../../assets/images/l3.jpg');
+    }
+    &.slide-4 {
+      background-image: url('../../assets/images/l4.jpg');
+    }
+    &.slide-5 {
+      background-image: url('../../assets/images/l5.jpg');
+    }
+    &.slide-6 {
+      background-image: url('../../assets/images/l6.jpg');
+    }
+    &.slide-7 {
+      background-image: url('../../assets/images/l7.jpg');
+    }
+  }
+  .nav {
+    font-family: '华文细黑';
+    width: 96%;
+    height: 64px;
+    margin-left: 2%;
+    ul {
+      padding-top: 10px;
+      font-size: 14px;
+      background: #ddd;
+      li {
+        cursor: pointer;
+        width: 12.5%;
+        float: left;
+        text-align: center;
+        div {
+          font-size: 12px;
+          color: #666;
+          &.active {
+            color: #ff5959;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

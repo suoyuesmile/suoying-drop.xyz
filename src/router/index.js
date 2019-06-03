@@ -87,6 +87,18 @@ export const constantRouterMap = [
         component: _import('challage/index')
       }
     ]
+  },
+  {
+    path: '/about',
+    name: '关于',
+    component: Layout,
+    redirect: '/about/index',
+    children: [
+      {
+        path: '/about/index',
+        component: _import('about/index')
+      }
+    ]
   }
 ]
 
